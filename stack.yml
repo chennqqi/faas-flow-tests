@@ -1,0 +1,118 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  func1:
+    lang: python
+    handler: ./func1
+    image: sort/func1:latest
+  func2:
+    lang: python
+    handler: ./func2
+    image: sort/func1:latest
+  flow-synccall:
+    lang: faas-flow
+    handler: ./flow-synccall
+    image: sort/flow-synccall:latest
+    enviroment:
+      workflow_name: "flow-synccall"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1
+  flow-asynccall:
+    lang: faas-flow
+    handler: ./flow-asynccall
+    image: flow-asynccall:latest
+    enviroment:
+      workflow_name: "flow-asynccall"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-syncall-modifier:
+    lang: faas-flow
+    handler: ./flow-syncall-modifier
+    image: flow-syncall-modifier:latest
+    enviroment:
+      workflow_name: "flow-syncall-modifier"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-foreach-forwarder:
+    lang: faas-flow
+    handler: ./flow-foreach-forwarder
+    image: flow-foreach-forwarder:latest
+    enviroment:
+      workflow_name: "flow-foreach-forwarder"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-foreach:
+    lang: faas-flow
+    handler: ./flow-foreach
+    image: flow-foreach:latest
+    enviroment:
+      workflow_name: "flow-foreach"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-dag:
+    lang: faas-flow
+    handler: ./flow-dag
+    image: flow-dag:latest
+    enviroment:
+      workflow_name: "flow-dag"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-condition:
+    lang: faas-flow
+    handler: ./flow-condition
+    image: flow-condition:latest
+    enviroment:
+      workflow_name: "flow-condition"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1    	
+  flow-asyncall-modifer:
+    lang: faas-flow
+    handler: ./flow-asyncall-modifer
+    image: flow-asyncall-modifer:latest
+    enviroment:
+      workflow_name: "flow-asyncall-modifer"
+    environment_file:
+    - environment.yml    	
+    secrets:
+    - s3-secret-key
+    - s3-access-key
+    labels:
+      faas-flow : 1
+    	   	    	    	    
