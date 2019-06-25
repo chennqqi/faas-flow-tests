@@ -1,0 +1,9 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  flow-asyncall-modifer:
+    lang: faas-flow
+    handler: ./flow-asyncall-modifer
+    image: flow-asyncall-modifer:latest
