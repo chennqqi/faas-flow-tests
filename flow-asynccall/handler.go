@@ -7,10 +7,22 @@ import (
 
 // Define provide definiton of the workflow
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
-	flow.Modify(func(data []byte) ([]byte, error) {
-		return []byte(fmt.Sprintf("you said \"%s\"", string(data))), nil
-	})
-	return
+          flow.
+        Apply("func1").
+	Apply("func2").
+        Modify(func(data []byte) ([]byte, error) {
+	        // Do something
+               	return data
+        }).
+        Callback("storage.io/bucket?id=3345612358265349126&file=" + context.Query.Get("filename")).
+        OnFailure(func(err error) {
+              // failure handler
+        }).
+        Finally(func(state string) {
+              // cleanup code
+        })
+	
+	return nil
 }
 
 // DefineStateStore provides the override of the default StateStore

@@ -7,10 +7,13 @@ import (
 
 // Define provide definiton of the workflow
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
-	flow.Modify(func(data []byte) ([]byte, error) {
-		return []byte(fmt.Sprintf("you said \"%s\"", string(data))), nil
-	})
-	return
+     flow.Apply("func1", faasflow.Sync).
+          Apply("func2", faasflow.Sync).
+	  Modify(func(data []byte) ([]byte, error) {
+	  	// Do something
+		return data, nil
+	  })
+     return nil
 }
 
 // DefineStateStore provides the override of the default StateStore
